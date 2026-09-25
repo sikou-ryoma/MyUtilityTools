@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ApplicationSetupWizardLite/ApplicationSetupWizardLite.csproj" Id="60d525b8-8844-40e7-9876-c26e37cb0c4e" />
+  <Project Path="XmlHelper/XmlHelper.csproj" />
+</Solution>

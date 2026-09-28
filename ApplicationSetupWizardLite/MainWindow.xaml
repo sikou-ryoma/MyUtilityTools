@@ -146,16 +146,19 @@
                     <Button x:Name="BackButton"
                             Content="戻る"
                             Style="{StaticResource WizardButtonStyle}"
-                            IsEnabled="False" Click="BackButton_Click"/>
+                            IsEnabled="False"
+                            Click="BackButton_Click"/>
 
                     <Button x:Name="NextButton"
                             Content="次へ ＞"
-                            Style="{StaticResource WizardButtonStyle}" Click="NextButton_Click"/>
+                            Style="{StaticResource WizardButtonStyle}"
+                            Click="NextButton_Click"/>
 
                     <Button x:Name="CancelButton"
                             Content="キャンセル"
                             Style="{StaticResource WizardButtonStyle}"
-                            Margin="20,0,0,0" Click="CancelButton_Click"/>
+                            Margin="20,0,0,0"
+                            Click="CancelButton_Click"/>
 
                 </StackPanel>
 

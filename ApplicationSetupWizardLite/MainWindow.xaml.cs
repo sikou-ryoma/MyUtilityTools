@@ -1,5 +1,6 @@
 ﻿using ApplicationSetupWizardLite.Context;
 using ApplicationSetupWizardLite.Paths;
+using ApplicationSetupWizardLite.Service;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,11 +21,14 @@ namespace ApplicationSetupWizardLite
     {
         // XmlHelper xml;
         private PathManager paths = new PathManager(AppContext.BaseDirectory);
-        private ProcessContext procCtx = new ProcessContext();
+        private ProcessContext procCtx;
+        private ProcessService procService;
         public MainWindow()
         {
             InitializeComponent();
             // xml = new XmlHelper(AppContext.BaseDirectory);
+            procCtx = new ProcessContext();
+            procService = new ProcessService(procCtx);
             ContentArea.Content = new Views.WelcomeView();
             GetStepStatus(procCtx.CurrentStep);
         }

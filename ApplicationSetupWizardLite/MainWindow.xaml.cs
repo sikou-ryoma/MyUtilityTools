@@ -1,4 +1,5 @@
-﻿using ApplicationSetupWizardLite.Paths;
+﻿using ApplicationSetupWizardLite.Context;
+using ApplicationSetupWizardLite.Paths;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,11 +20,53 @@ namespace ApplicationSetupWizardLite
     {
         // XmlHelper xml;
         private PathManager paths = new PathManager(AppContext.BaseDirectory);
+        private ProcessContext procCtx = new ProcessContext();
         public MainWindow()
         {
             InitializeComponent();
             // xml = new XmlHelper(AppContext.BaseDirectory);
             ContentArea.Content = new Views.WelcomeView();
+            GetStepStatus(procCtx.CurrentStep);
         }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (procCtx.CurrentStep < 4)
+            {
+                procCtx.NextStep();
+                GetStepStatus(procCtx.CurrentStep);
+
+                if (procCtx.CurrentStep > 0)
+                { 
+                    BackButton.IsEnabled = true;
+                }
+            }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (procCtx.CurrentStep > 0)
+            {
+                procCtx.PreviousStep();
+                GetStepStatus(procCtx.CurrentStep);
+
+                if (procCtx.CurrentStep == 0)
+                {
+                    BackButton.IsEnabled = false;
+                }
+            }
+        }
+
+        private void GetStepStatus(int step)
+        {
+            Step1.Text = (step == 0 ? ProcessContext.PROGRESS_CURRENT : (step > 0 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP1;
+            Step2.Text = (step == 1 ? ProcessContext.PROGRESS_CURRENT : (step > 1 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP2;
+            Step3.Text = (step == 2 ? ProcessContext.PROGRESS_CURRENT : (step > 2 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP3;
+            Step4.Text = (step == 3 ? ProcessContext.PROGRESS_CURRENT : (step > 3 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP4;
+            Step5.Text = (step == 4 ? ProcessContext.PROGRESS_CURRENT : (step > 4 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP5;
+        }
+
     }
 }

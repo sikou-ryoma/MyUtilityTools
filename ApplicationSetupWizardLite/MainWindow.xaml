@@ -84,19 +84,24 @@
                     <StackPanel Grid.Row="1"
                                 Margin="0,50,0,0">
 
-                        <TextBlock Text="●  ようこそ"
+                        <TextBlock x:Name="Step1"
+                                   Text="●  ようこそ"
                                    Style="{StaticResource StepTextStyle}"/>
 
-                        <TextBlock Text="○  インストール先"
+                        <TextBlock x:Name="Step2"
+                                   Text="○  インストール先"
                                    Style="{StaticResource StepTextStyle}"/>
 
-                        <TextBlock Text="○  確認"
+                        <TextBlock x:Name="Step3"
+                                   Text="○  確認"
                                    Style="{StaticResource StepTextStyle}"/>
 
-                        <TextBlock Text="○  インストール"
+                        <TextBlock x:Name="Step4"
+                                   Text="○  インストール"
                                    Style="{StaticResource StepTextStyle}"/>
 
-                        <TextBlock Text="○  完了"
+                        <TextBlock x:Name="Step5"
+                                   Text="○  完了"
                                    Style="{StaticResource StepTextStyle}"/>
 
                     </StackPanel>
@@ -138,16 +143,19 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center">
 
-                    <Button Content="戻る"
+                    <Button x:Name="BackButton"
+                            Content="戻る"
                             Style="{StaticResource WizardButtonStyle}"
-                            IsEnabled="False"/>
+                            IsEnabled="False" Click="BackButton_Click"/>
 
-                    <Button Content="次へ ＞"
-                            Style="{StaticResource WizardButtonStyle}"/>
+                    <Button x:Name="NextButton"
+                            Content="次へ ＞"
+                            Style="{StaticResource WizardButtonStyle}" Click="NextButton_Click"/>
 
-                    <Button Content="キャンセル"
+                    <Button x:Name="CancelButton"
+                            Content="キャンセル"
                             Style="{StaticResource WizardButtonStyle}"
-                            Margin="20,0,0,0"/>
+                            Margin="20,0,0,0" Click="CancelButton_Click"/>
 
                 </StackPanel>
 

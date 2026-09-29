@@ -56,10 +56,12 @@ namespace ApplicationSetupWizardLite
             {
                 case 0:
                     ContentArea.Content = new Views.WelcomeView(appConf);
+                    NextButton.Content = "次へ ＞";
                     BackButton.IsEnabled = false;
                     break;
                 case 1:
                     ContentArea.Content = new Views.InstallLocationView(appConf, paths);
+                    NextButton.Content = "次へ ＞";
                     BackButton.IsEnabled = true;
                     break;
                 case 2:

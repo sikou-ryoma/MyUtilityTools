@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="ApplicationSetupWizardLite.Views.ConfirmView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ApplicationSetupWizardLite.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
+    <Grid Margin="35">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- タイトル -->
+        <TextBlock Grid.Row="0"
+               Text="インストール内容を確認してください"
+               FontSize="20"
+               FontWeight="SemiBold"
+               Foreground="#333333"
+               Margin="0,0,0,12"/>
+
+
+        <!-- 説明 -->
+        <TextBlock Grid.Row="1"
+               Text="以下の内容でインストールを開始します。内容を確認して「次へ」をクリックしてください。"
+               FontSize="14"
+               Foreground="#555555"
+               TextWrapping="Wrap"
+               Margin="0,0,0,25"/>
+
+
+        <!-- 確認内容 -->
+        <Border Grid.Row="2"
+            BorderBrush="#DDDDDD"
+            BorderThickness="1"
+            Background="#FAFAFA"
+            Padding="20">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <!-- アプリケーション -->
+                <Grid Grid.Row="0"
+                  Margin="0,0,0,15">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                           Text="アプリケーション"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="#555555"/>
+
+                    <TextBlock Grid.Column="1"
+                           x:Name="ApplicationNameText"
+                           Text="MY APPLICATION"
+                           FontSize="13"
+                           Foreground="#333333"/>
+
+                </Grid>
+
+
+                <!-- インストール先 -->
+                <Grid Grid.Row="1"
+                  Margin="0,0,0,15">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                           Text="インストール先"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="#555555"/>
+
+                    <TextBlock Grid.Column="1"
+                           x:Name="InstallPathText"
+                           Text="C:\Program Files\My Application"
+                           FontSize="13"
+                           Foreground="#333333"
+                           TextWrapping="Wrap"/>
+
+                </Grid>
+
+
+                <!-- 必要容量 -->
+                <Grid Grid.Row="2"
+                  Margin="0,0,0,15">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                           Text="必要なディスク容量"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="#555555"/>
+
+                    <TextBlock Grid.Column="1"
+                           x:Name="RequiredSpaceText"
+                           Text="約 250 MB"
+                           FontSize="13"
+                           Foreground="#333333"/>
+
+                </Grid>
+
+
+                <!-- スタートメニュー -->
+                <Grid Grid.Row="3">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                           Text="スタートメニュー"
+                           FontSize="13"
+                           FontWeight="SemiBold"
+                           Foreground="#555555"/>
+
+                    <TextBlock Grid.Column="1"
+                           x:Name="ShortcutText"
+                           Text="ショートカットを作成"
+                           FontSize="13"
+                           Foreground="#333333"/>
+
+                </Grid>
+
+            </Grid>
+
+        </Border>
+
+
+        <!-- 補足 -->
+        <TextBlock Grid.Row="3"
+               Text="インストールを開始するには「次へ」をクリックしてください。"
+               FontSize="12"
+               Foreground="#777777"
+               Margin="0,25,0,0"
+               VerticalAlignment="Top"/>
+
+    </Grid>
+</UserControl>

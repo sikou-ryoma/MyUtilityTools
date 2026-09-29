@@ -9,19 +9,28 @@ namespace ApplicationSetupWizardLite.Service
     {
         private readonly XmlHelper _xmlHelper;
         private readonly ProcessContext _procCtx;
-        
+
         public ProcessService(XmlHelper xmlHelper, ProcessContext processContext)
         {
             _xmlHelper = xmlHelper;
             _procCtx = processContext;
         }
 
-        public void NextStep()
+        public void NextProcess()
         {
             if (_procCtx.CurrentStep < 4)
             {
                 _procCtx.NextStep();
             }
         }
+
+        public void PreviousProcess()
+        {
+            if (_procCtx.CurrentStep > 0)
+            {
+                _procCtx.PreviousStep();
+            }
+        }
+
     }
 }

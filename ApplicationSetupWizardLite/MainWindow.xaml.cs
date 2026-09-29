@@ -35,15 +35,61 @@ namespace ApplicationSetupWizardLite
             procCtx = new ProcessContext();
             procService = new ProcessService(xml, procCtx);
             appConf = new AppConfig(xml);
-            ContentArea.Content = new Views.WelcomeView(appConf);
-            GetStepStatus(procCtx.CurrentStep);
+            GetStepStatus();
+            ChengeContent(procCtx.CurrentStep);
             AppNameLbl1.Text = appConf.appName;
             VersionLbl.Text = "Version " + appConf.appVersion;
         }
 
+        private void GetStepStatus()
+        {
+            Step1.Text = procCtx.Step1Status;
+            Step2.Text = procCtx.Step2Status;
+            Step3.Text = procCtx.Step3Status;
+            Step4.Text = procCtx.Step4Status;
+            Step5.Text = procCtx.Step5Status;
+        }
+
+        private void ChengeContent(int step)
+        {
+            switch (step)
+            {
+                case 0:
+                    ContentArea.Content = new Views.WelcomeView(appConf);
+                    BackButton.IsEnabled = false;
+                    break;
+                case 1:
+                    ContentArea.Content = new Views.InstallLocationView(appConf, paths);
+                    BackButton.IsEnabled = true;
+                    break;
+                case 2:
+                    ContentArea.Content = new Views.ConfirmView(appConf, paths);
+                    NextButton.Content = "インストール";
+                    break;
+                case 3:
+                    ContentArea.Content = new Views.InstallingView(appConf);
+                    BackButton.IsEnabled = false;
+                    break;
+                case 4:
+                    ContentArea.Content = new Views.CompleteView(appConf);
+                    NextButton.Content = "完了";
+                    CancelButton.Visibility = Visibility.Collapsed;
+                    BackButton.Visibility = Visibility.Collapsed;
+                    break;
+                    // Add more cases as needed
+            }
+        }
+
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("インストールを中止しますか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            var result = MessageBox.Show(
+                "セットアップを中止しますか？", 
+                "確認", 
+                MessageBoxButton.YesNo, 
+                MessageBoxImage.Question
+            );
+
+            if (result == MessageBoxResult.Yes)
             {
                 this.Close();
             }
@@ -51,39 +97,21 @@ namespace ApplicationSetupWizardLite
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (procCtx.CurrentStep < 4)
+            if (procCtx.IsCompleted)
             {
-                procCtx.NextStep();
-                GetStepStatus(procCtx.CurrentStep);
-
-                if (procCtx.CurrentStep > 0)
-                { 
-                    BackButton.IsEnabled = true;
-                }
+                this.Close();
             }
+
+            procService.NextProcess();
+            GetStepStatus();
+            ChengeContent(procCtx.CurrentStep);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (procCtx.CurrentStep > 0)
-            {
-                procCtx.PreviousStep();
-                GetStepStatus(procCtx.CurrentStep);
-
-                if (procCtx.CurrentStep == 0)
-                {
-                    BackButton.IsEnabled = false;
-                }
-            }
-        }
-
-        private void GetStepStatus(int step)
-        {
-            Step1.Text = (step == 0 ? ProcessContext.PROGRESS_CURRENT : (step > 0 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP1;
-            Step2.Text = (step == 1 ? ProcessContext.PROGRESS_CURRENT : (step > 1 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP2;
-            Step3.Text = (step == 2 ? ProcessContext.PROGRESS_CURRENT : (step > 2 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP3;
-            Step4.Text = (step == 3 ? ProcessContext.PROGRESS_CURRENT : (step > 3 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP4;
-            Step5.Text = (step == 4 ? ProcessContext.PROGRESS_CURRENT : (step > 4 ? ProcessContext.PROGRESS_COMPLETE : ProcessContext.PROGRESS_PENDING)) + ProcessContext.STEP5;
+            procService.PreviousProcess();
+            GetStepStatus();
+            ChengeContent(procCtx.CurrentStep);
         }
 
     }

@@ -144,7 +144,7 @@
                             VerticalAlignment="Center">
 
                     <Button x:Name="BackButton"
-                            Content="戻る"
+                            Content="＜ 戻る"
                             Style="{StaticResource WizardButtonStyle}"
                             IsEnabled="False"
                             Click="BackButton_Click"/>

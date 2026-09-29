@@ -11,6 +11,7 @@ namespace ApplicationSetupWizardLite.Paths
         public string xmlFilePath { get; }
         public string excelBookDirPath { get; }
         public string logDirPath { get; }
+        public string installPath { get; set; }
 
         public PathManager(string baseDir)
         {
@@ -18,6 +19,8 @@ namespace ApplicationSetupWizardLite.Paths
             xmlFilePath = Path.Combine(baseDir, "Conf", "config.xml");
             excelBookDirPath = Path.Combine(baseDir, "workbook");
             logDirPath = Path.Combine(baseDir, "log");
+            installPath = 
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "MyApp");
         }
     }
 }

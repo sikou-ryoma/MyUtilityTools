@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace ApplicationSetupWizardLite.Paths
 {
     public class PathManager
     {
-        // private readonly XmlHelper _xmlHelper;
-        public string BaseDir { get; }
+        public string baseDirPath { get; }
+        public string xmlFilePath { get; }
+        public string excelBookDirPath { get; }
+        public string logDirPath { get; }
 
         public PathManager(string baseDir)
         {
-            BaseDir = baseDir;
+            baseDirPath = baseDir;
+            xmlFilePath = Path.Combine(baseDir, "Conf", "config.xml");
+            excelBookDirPath = Path.Combine(baseDir, "workbook");
+            logDirPath = Path.Combine(baseDir, "log");
         }
     }
 }

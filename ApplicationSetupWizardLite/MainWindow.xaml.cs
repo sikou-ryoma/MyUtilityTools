@@ -2,6 +2,7 @@
 using ApplicationSetupWizardLite.Paths;
 using ApplicationSetupWizardLite.Service;
 using System.Text;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using ApplicationSetupWizardLite.Conf;
 
 
 namespace ApplicationSetupWizardLite
@@ -19,21 +21,33 @@ namespace ApplicationSetupWizardLite
     /// </summary>
     public partial class MainWindow : Window
     {
-        // XmlHelper xml;
-        private PathManager paths = new PathManager(AppContext.BaseDirectory);
+        private PathManager paths =     
+            new PathManager(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..")));
+        private XmlHelper xml;
         private ProcessContext procCtx;
         private ProcessService procService;
+        private AppConfig appConf;
+
         public MainWindow()
         {
             InitializeComponent();
-            // xml = new XmlHelper(AppContext.BaseDirectory);
+            xml = new XmlHelper(paths.xmlFilePath);
             procCtx = new ProcessContext();
-            procService = new ProcessService(procCtx);
-            ContentArea.Content = new Views.WelcomeView();
+            procService = new ProcessService(xml, procCtx);
+            appConf = new AppConfig(xml);
+            ContentArea.Content = new Views.WelcomeView(appConf);
             GetStepStatus(procCtx.CurrentStep);
+            AppNameLbl1.Text = appConf.appName;
+            VersionLbl.Text = "Version " + appConf.appVersion;
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("インストールを中止しますか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
+        }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {

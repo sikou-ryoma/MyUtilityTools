@@ -18,12 +18,13 @@
                     BorderBrush="#E0E0E0"
                     BorderThickness="0,0,0,1">
 
-            <TextBlock Text="MY APPLICATION セットアップ"
-                            VerticalAlignment="Center"
-                            Margin="35,0"
-                            FontSize="22"
-                            FontWeight="SemiBold"
-                            Foreground="#333333"/>
+            <TextBlock x:Name="TitleTextBlock"
+                        Text="セットアップ"
+                        VerticalAlignment="Center"
+                        Margin="35,0"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="#333333"/>
 
         </Border>
 
@@ -39,21 +40,23 @@
 
 
             <!-- 説明 -->
-            <TextBlock Grid.Row="0"
-                            Text="セットアップウィザードへようこそ"
-                            FontSize="18"
-                            FontWeight="SemiBold"
-                            Foreground="#333333"
-                            Margin="0,0,0,25"/>
+            <TextBlock x:Name="DescriptionTextBlock"
+                        Grid.Row="0"
+                        Text="セットアップウィザードへようこそ"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="#333333"
+                        Margin="0,0,0,25"/>
 
 
             <!-- 内容 -->
             <StackPanel Grid.Row="1">
 
-                <TextBlock Text="MY APPLICATION をコンピューターにインストールします。"
-                                FontSize="14"
-                                Foreground="#444444"
-                                TextWrapping="Wrap"/>
+                <TextBlock x:Name="ContentTextBlock"
+                            Text="アプリケーションをコンピューターにインストールします。"
+                            FontSize="14"
+                            Foreground="#444444"
+                            TextWrapping="Wrap"/>
 
                 <TextBlock Text="続行するには「次へ」をクリックしてください。"
                                 FontSize="14"

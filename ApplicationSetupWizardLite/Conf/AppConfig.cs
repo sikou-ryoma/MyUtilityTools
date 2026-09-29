@@ -6,16 +6,16 @@ namespace ApplicationSetupWizardLite.Conf
 {
     public class AppConfig
     {
-        // private readonly XmlHelper _xmlHelper;
+        private readonly XmlHelper _xmlHelper;
         public string appName { get; }
         public string appVersion { get; }
         public string companyName { get; }
-        public AppConfig()
+        public AppConfig(XmlHelper xmlHelper)
         {
-            // _xmlHelper = new XmlHelper(AppContext.BaseDirectory);
-            appName = "Application Setup Wizard Lite";
-            appVersion = "1.0.0";
-            companyName = "Your Company Name";
+            _xmlHelper = xmlHelper;
+            appName = _xmlHelper.GetString("App", "Meta", "AppName");
+            appVersion = _xmlHelper.GetString("App", "Meta", "AppVersion");
+            companyName = _xmlHelper.GetString("App", "Meta", "CompanyName");
         }
     }
 }

@@ -3,10 +3,10 @@
 <Config>
 	<App>
 		<Meta>
-			<Setting Name="AppName" Value="MY APPLICATION" />
-			<Setting Name="AppVersion" Value="1.0.0" />
-			<Setting Name="CompanyName" Value="My Company" />
-			<Setting Name="InstallDirectory" Value="%ProgramFiles%\MyApplication" />
+			<AppName>Application</AppName>
+			<AppVersion>0.9.0</AppVersion>
+			<CompanyName>Company</CompanyName>
+			<InstallDirectory>%ProgramFiles%\MyApplication</InstallDirectory>
 		</Meta>
 	</App>
 </Config>

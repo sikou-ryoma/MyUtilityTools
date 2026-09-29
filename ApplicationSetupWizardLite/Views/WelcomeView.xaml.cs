@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationSetupWizardLite.Conf;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +19,14 @@ namespace ApplicationSetupWizardLite.Views
     /// </summary>
     public partial class WelcomeView : UserControl
     {
-        public WelcomeView()
+       private readonly AppConfig _appConf;
+
+        public WelcomeView(AppConfig appConf)
         {
             InitializeComponent();
+            _appConf = appConf;
+            TitleTextBlock.Text = $"{_appConf.appName} セットアップ";
+            ContentTextBlock.Text = $"{_appConf.appName} をコンピューターにインストールします。";
         }
     }
 }

@@ -18,7 +18,7 @@ namespace ApplicationSetupWizardLite.Service
 
         public void NextProcess()
         {
-            if (_procCtx.CurrentStep < 4)
+            if (_procCtx.currentStep < 4)
             {
                 _procCtx.NextStep();
             }
@@ -26,7 +26,7 @@ namespace ApplicationSetupWizardLite.Service
 
         public void PreviousProcess()
         {
-            if (_procCtx.CurrentStep > 0)
+            if (_procCtx.currentStep > 0)
             {
                 _procCtx.PreviousStep();
             }

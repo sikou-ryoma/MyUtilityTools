@@ -20,7 +20,7 @@ namespace ApplicationSetupWizardLite.Paths
             excelBookDirPath = Path.Combine(baseDir, "workbook");
             logDirPath = Path.Combine(baseDir, "log");
             installPath = 
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "MyApp");
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
         }
     }
 }

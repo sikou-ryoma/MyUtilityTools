@@ -36,18 +36,18 @@ namespace ApplicationSetupWizardLite
             procService = new ProcessService(xml, procCtx);
             appConf = new AppConfig(xml);
             GetStepStatus();
-            ChengeContent(procCtx.CurrentStep);
+            ChengeContent(procCtx.currentStep);
             AppNameLbl1.Text = appConf.appName;
             VersionLbl.Text = "Version " + appConf.appVersion;
         }
 
         private void GetStepStatus()
         {
-            Step1.Text = procCtx.Step1Status;
-            Step2.Text = procCtx.Step2Status;
-            Step3.Text = procCtx.Step3Status;
-            Step4.Text = procCtx.Step4Status;
-            Step5.Text = procCtx.Step5Status;
+            Step1.Text = procCtx.step1Status;
+            Step2.Text = procCtx.step2Status;
+            Step3.Text = procCtx.step3Status;
+            Step4.Text = procCtx.step4Status;
+            Step5.Text = procCtx.step5Status;
         }
 
         private void ChengeContent(int step)
@@ -60,12 +60,13 @@ namespace ApplicationSetupWizardLite
                     BackButton.IsEnabled = false;
                     break;
                 case 1:
-                    ContentArea.Content = new Views.InstallLocationView(appConf, paths);
+                    ContentArea.Content = new Views.InstallLocationView(appConf, xml, paths, procCtx);
                     NextButton.Content = "次へ ＞";
                     BackButton.IsEnabled = true;
                     break;
                 case 2:
-                    ContentArea.Content = new Views.ConfirmView(appConf, paths);
+                    ContentArea.Content = new Views.ConfirmView(appConf, xml, paths, procCtx);
+                    ((Views.ConfirmView)ContentArea.Content).UpdateConfirmView();
                     NextButton.Content = "インストール";
                     break;
                 case 3:
@@ -106,14 +107,14 @@ namespace ApplicationSetupWizardLite
 
             procService.NextProcess();
             GetStepStatus();
-            ChengeContent(procCtx.CurrentStep);
+            ChengeContent(procCtx.currentStep);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             procService.PreviousProcess();
             GetStepStatus();
-            ChengeContent(procCtx.CurrentStep);
+            ChengeContent(procCtx.currentStep);
         }
 
     }

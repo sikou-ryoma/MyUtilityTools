@@ -99,7 +99,7 @@
                       Content="デスクトップへショートカットを作成する"
                       FontSize="12"
                       IsChecked="True"
-                      Margin="0,25,0,0"/>
+                      Margin="0,25,0,0" />
 
             <TextBlock Text="インストール先を変更する場合は「参照...」をクリックしてください。"
                     FontSize="12"

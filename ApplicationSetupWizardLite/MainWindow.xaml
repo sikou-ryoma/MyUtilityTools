@@ -46,7 +46,8 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="64*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <!-- ========================= -->
@@ -123,7 +124,7 @@
             <!-- ========================= -->
             <ContentControl x:Name="ContentArea"
                             Grid.Column="1"
-                            Background="White">
+                            Background="White" Grid.ColumnSpan="2">
             </ContentControl>
 
         </Grid>

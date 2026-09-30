@@ -15,43 +15,46 @@ namespace ApplicationSetupWizardLite.Context
         private string pendingText { get; } = "〇  ";
         private string currentText { get; } = "▶  ";
 
-        public string Step1Status { get; private set; }
-        public string Step2Status { get; private set; }
-        public string Step3Status { get; private set; }
-        public string Step4Status { get; private set; }
-        public string Step5Status { get; private set; }
+        public string step1Status { get; private set; }
+        public string step2Status { get; private set; }
+        public string step3Status { get; private set; }
+        public string step4Status { get; private set; }
+        public string step5Status { get; private set; }
 
-        public int CurrentStep { get; private set; }
-        public bool IsCompleted => CurrentStep >= 4; // Assuming there are 5 steps in the process
+        public int currentStep { get; private set; }
+        public bool IsCompleted => currentStep >= 4; // Assuming there are 5 steps in the process
+
+        public bool canCreateShortcut { get; set; } = true;
+        public bool canOpenApplication { get; set; } = true;
 
         public ProcessContext()
         {
-            CurrentStep = 0;
-            Step1Status = currentText + step1Text;
-            Step2Status = pendingText + step2Text;
-            Step3Status = pendingText + step3Text;
-            Step4Status = pendingText + step4Text;
-            Step5Status = pendingText + step5Text;
+            currentStep = 0;
+            step1Status = currentText + step1Text;
+            step2Status = pendingText + step2Text;
+            step3Status = pendingText + step3Text;
+            step4Status = pendingText + step4Text;
+            step5Status = pendingText + step5Text;
         }
         public void NextStep()
         {
-            CurrentStep++;
-            SetStepStatus(CurrentStep); 
+            currentStep++;
+            SetStepStatus(currentStep); 
         }
 
         public void PreviousStep()
         {
-            CurrentStep--;
-            SetStepStatus(CurrentStep);
+            currentStep--;
+            SetStepStatus(currentStep);
         }
 
         private void SetStepStatus(int step)
         {
-            Step1Status = (step == 0 ? currentText : (step > 0 ? completeText : pendingText)) + step1Text;
-            Step2Status = (step == 1 ? currentText : (step > 1 ? completeText : pendingText)) + step2Text;
-            Step3Status = (step == 2 ? currentText : (step > 2 ? completeText : pendingText)) + step3Text;
-            Step4Status = (step == 3 ? currentText : (step > 3 ? completeText : pendingText)) + step4Text;
-            Step5Status = (step == 4 ? currentText : (step > 4 ? completeText : pendingText)) + step5Text;
+            step1Status = (step == 0 ? currentText : (step > 0 ? completeText : pendingText)) + step1Text;
+            step2Status = (step == 1 ? currentText : (step > 1 ? completeText : pendingText)) + step2Text;
+            step3Status = (step == 2 ? currentText : (step > 2 ? completeText : pendingText)) + step3Text;
+            step4Status = (step == 3 ? currentText : (step > 3 ? completeText : pendingText)) + step4Text;
+            step5Status = (step == 4 ? currentText : (step > 4 ? completeText : pendingText)) + step5Text;
         }
 
 

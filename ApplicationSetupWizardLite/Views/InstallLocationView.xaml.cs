@@ -41,13 +41,6 @@ namespace ApplicationSetupWizardLite.Views
             _paths = paths;
             _procCtx = processContext;
 
-            _procCtx.installPath = System.IO.Path.Combine(
-                _paths.defaultInstallPath,
-                _appConfig.companyName,
-                _appConfig.appName,
-                _appConfig.appVersion
-            );
-
             InstallPathTextBox.Text = _procCtx.installPath;
             ShortcutsCheckBox.IsChecked = true;
         }

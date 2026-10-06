@@ -50,6 +50,14 @@ namespace ApplicationSetupWizardLite
             ChangeContent(procCtx.currentStep);
             AppNameLbl1.Text = appConf.appName;
             VersionLbl.Text = "Version " + appConf.appVersion;
+            
+            procCtx.installPath = Path.Combine(
+                paths.defaultInstallPath,
+                appConf.companyName,
+                appConf.appName,
+                appConf.appVersion
+            );
+
         }
 
         private string GetStepStatus(int step)

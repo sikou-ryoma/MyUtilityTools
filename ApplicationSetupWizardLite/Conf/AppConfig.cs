@@ -10,6 +10,7 @@ namespace ApplicationSetupWizardLite.Conf
         public string appName { get; }
         public string appVersion { get; }
         public string companyName { get; }
+
         public AppConfig(XmlHelper xmlHelper)
         {
             _xmlHelper = xmlHelper;

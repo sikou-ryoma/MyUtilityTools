@@ -17,7 +17,7 @@ namespace ApplicationSetupWizardLite.Views
     /// <summary>
     /// CompleteView.xaml の相互作用ロジック
     /// </summary>
-    public partial class CompleteView : UserControl
+    public partial class CompleteView : System.Windows.Controls.UserControl
     {
         private readonly AppConfig _appConfig;
         public CompleteView(AppConfig appConfig)

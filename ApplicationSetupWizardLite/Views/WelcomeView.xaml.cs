@@ -17,7 +17,7 @@ namespace ApplicationSetupWizardLite.Views
     /// <summary>
     /// WelcomeView.xaml の相互作用ロジック
     /// </summary>
-    public partial class WelcomeView : UserControl
+    public partial class WelcomeView : System.Windows.Controls.UserControl
     {
        private readonly AppConfig _appConf;
 

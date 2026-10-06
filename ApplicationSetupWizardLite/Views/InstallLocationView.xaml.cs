@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Printing;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace ApplicationSetupWizardLite.Views
 {
@@ -32,32 +33,34 @@ namespace ApplicationSetupWizardLite.Views
             AppConfig appConfig,
             XmlHelper xmlHelper,
             PathManager paths,
-            ProcessContext processContext)
-        {
+            ProcessContext processContext
+        ){
             InitializeComponent();
             _appConfig = appConfig;
             _xmlHelper = xmlHelper;
             _paths = paths;
             _procCtx = processContext;
 
-            _paths.installPath = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), 
+            _procCtx.installPath = System.IO.Path.Combine(
+                _paths.defaultInstallPath,
                 _appConfig.companyName,
                 _appConfig.appName,
-                _appConfig.appVersion);
+                _appConfig.appVersion
+            );
 
-            InstallPathTextBox.Text = _paths.installPath;
+            InstallPathTextBox.Text = _procCtx.installPath;
             ShortcutsCheckBox.IsChecked = true;
         }
 
         public void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-/*            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                InstallLocationTextBox.Text = dialog.SelectedPath;
-            }*/       
+                InstallPathTextBox.Text = dialog.SelectedPath;
+                _procCtx.installPath = dialog.SelectedPath;
+            }
         }
     }
 }

@@ -8,7 +8,8 @@
         MinHeight="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Background="#F5F5F5">
+        Background="#F5F5F5"
+        Closing="Window_Closing">
 
     <Window.Resources>
 
@@ -33,6 +34,11 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="396*"/>
+            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="13*"/>
+        </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -42,7 +48,7 @@
         <!-- ========================= -->
         <!-- メイン領域 -->
         <!-- ========================= -->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"/>
@@ -133,10 +139,10 @@
         <!-- ========================= -->
         <!-- 下部ボタン -->
         <!-- ========================= -->
-        <Border Grid.Row="1"
+        <Border
                 Background="#F2F2F2"
                 BorderBrush="#D0D0D0"
-                BorderThickness="0,1,0,0">
+                BorderThickness="0,1,0,0" Grid.ColumnSpan="3" Margin="0,474,0,0" Grid.RowSpan="2">
 
             <Grid Margin="20,0">
 

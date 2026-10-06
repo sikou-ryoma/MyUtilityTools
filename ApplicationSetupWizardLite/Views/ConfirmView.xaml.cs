@@ -19,7 +19,7 @@ namespace ApplicationSetupWizardLite.Views
     /// <summary>
     /// ConfirmView.xaml の相互作用ロジック
     /// </summary>
-    public partial class ConfirmView : UserControl
+    public partial class ConfirmView : System.Windows.Controls.UserControl
     {
         private readonly AppConfig _appConfig;
         private readonly XmlHelper _xmlHelper;
@@ -33,10 +33,11 @@ namespace ApplicationSetupWizardLite.Views
             _paths = paths;
             _procCtx = procCtx;
             ApplicationNameText.Text = _appConfig.appName;
+            UpdateConfirmView();
         }
         public void UpdateConfirmView()
         {
-            InstallPathText.Text = _paths.installPath;
+            InstallPathText.Text = _procCtx.installPath;
             ShortcutText.Text = _procCtx.canCreateShortcut ? "ショートカットを作成する" : "作成しない";
         }
     }

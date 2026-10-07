@@ -17,7 +17,7 @@ namespace ApplicationSetupWizardLite
     public partial class MainWindow : Window
     {
         private PathManager paths =     
-            new PathManager(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..")));
+            new PathManager(Path.GetFullPath(AppContext.BaseDirectory));
         private XmlHelper xml;
         private ProcessContext procCtx = new ProcessContext();
         private SetupContext setupCtx;
@@ -38,9 +38,9 @@ namespace ApplicationSetupWizardLite
         {
             InitializeComponent();
             xml = new XmlHelper(paths.xmlFilePath);
-            procService = new ProcessService(xml, procCtx);
             appConf = new AppConfig(xml);
             setupCtx = new SetupContext(appConf);
+            procService = new ProcessService(xml, procCtx, setupCtx);
             GetStepMessages();
             ChangeContent(procCtx.currentStep);
             AppNameLbl1.Text = appConf.appName;

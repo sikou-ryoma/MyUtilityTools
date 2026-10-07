@@ -10,6 +10,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Conf\config.xml" />
+    <None Remove="Payload\sample\sample.txt" />
+    <None Remove="Payload\test.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Conf\config.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Payload\sample\sample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Payload\test.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\XmlHelper\XmlHelper.csproj" />
   </ItemGroup>
 

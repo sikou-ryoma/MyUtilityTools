@@ -1,4 +1,5 @@
 ﻿using ApplicationSetupWizardLite.Context;
+using System.IO;
 
 namespace ApplicationSetupWizardLite.Service
 {
@@ -6,13 +7,22 @@ namespace ApplicationSetupWizardLite.Service
     {
         private readonly XmlHelper _xmlHelper;
         private readonly ProcessContext _procCtx;
+        private readonly SetupContext _setupCtx;
 
-        public ProcessService(XmlHelper xmlHelper, ProcessContext processContext)
+        public ProcessService(
+            XmlHelper xmlHelper,
+            ProcessContext processContext,
+            SetupContext setupContext)
         {
             _xmlHelper = xmlHelper;
             _procCtx = processContext;
+            _setupCtx = setupContext;
         }
 
+        /// <summary>
+        /// 各ステップを進める。現在のステップに応じて必要なサービスを呼び出す。
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         public void NextProcess()
         {
             switch(_procCtx.currentStep)
@@ -68,6 +78,31 @@ namespace ApplicationSetupWizardLite.Service
                     break;
                 default:
                     throw new InvalidOperationException("Invalid step index.");
+            }
+        }
+
+        // TODO: インストール処理を実装する。ここでは、Payloadフォルダ内のファイルを指定されたインストールパスにコピーする簡単な例。
+        public void Install(string installPath)
+        {
+            string payloadPath = "Payload";
+
+            foreach (string file in Directory.GetFiles(
+                payloadPath,
+                "*",
+                SearchOption.AllDirectories))
+            {
+                string relativePath = Path.GetRelativePath(
+                    payloadPath,
+                    file);
+
+                string destination = Path.Combine(
+                    installPath,
+                    relativePath);
+
+                Directory.CreateDirectory(
+                    Path.GetDirectoryName(destination)!);
+
+                File.Copy(file, destination, true);
             }
         }
 

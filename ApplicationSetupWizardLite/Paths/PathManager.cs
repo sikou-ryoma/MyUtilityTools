@@ -6,16 +6,16 @@ namespace ApplicationSetupWizardLite.Paths
     {
         public string baseDirPath { get; }
         public string xmlFilePath { get; }
-        public string excelBookDirPath { get; }
-        public string logDirPath { get; }
+        // public string excelBookDirPath { get; }
+        // public string logDirPath { get; }
         public string defaultInstallPath { get; set; }
 
         public PathManager(string baseDir)
         {
             baseDirPath = baseDir;
             xmlFilePath = Path.Combine(baseDir, "Conf", "config.xml");
-            excelBookDirPath = Path.Combine(baseDir, "workbook");
-            logDirPath = Path.Combine(baseDir, "log");
+            // excelBookDirPath = Path.Combine(baseDir, "workbook");
+            // logDirPath = Path.Combine(baseDir, "log");
             defaultInstallPath = 
                 Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
         }

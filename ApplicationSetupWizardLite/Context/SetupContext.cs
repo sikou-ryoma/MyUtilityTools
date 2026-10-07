@@ -1,8 +1,34 @@
-﻿namespace ApplicationSetupWizardLite.Context
+﻿using ApplicationSetupWizardLite.Conf;
+
+namespace ApplicationSetupWizardLite.Context
+
 {
     public class SetupContext
     {
+        private readonly AppConfig _appConfig;
         public string InstallPath { get; set; } = "";
         public bool CreateShortcut { get; set; } = true;
+
+        public SetupContext(AppConfig appConfig)
+        {
+            _appConfig = appConfig;
+            InstallPath = "";
+            CreateShortcut = true;
+        }
+
+        public string GetFullInstallPath(string baseInstallPath = "")
+        {
+            if (string.IsNullOrEmpty(baseInstallPath))
+            {
+                baseInstallPath = InstallPath;
+            }
+
+            return System.IO.Path.Combine(
+                baseInstallPath,
+                _appConfig.companyName,
+                _appConfig.appName,
+                _appConfig.appVersion
+            );
+        }
     }
 }

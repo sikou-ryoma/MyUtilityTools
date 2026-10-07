@@ -1,6 +1,7 @@
 ﻿using ApplicationSetupWizardLite.Conf;
 using ApplicationSetupWizardLite.Paths;
 using ApplicationSetupWizardLite.Context;
+using System.IO;
 
 namespace ApplicationSetupWizardLite.Views
 {
@@ -27,7 +28,12 @@ namespace ApplicationSetupWizardLite.Views
         }
         public void UpdateConfirmView()
         {
-            InstallPathText.Text = _setupCtx.InstallPath;
+            InstallPathText.Text = Path.Combine(
+                    _setupCtx.InstallPath,
+                    _appConfig.companyName,
+                    _appConfig.appName,
+                    _appConfig.appVersion
+            );
             ShortcutText.Text = _setupCtx.CreateShortcut ? "ショートカットを作成する" : "作成しない";
         }
     }

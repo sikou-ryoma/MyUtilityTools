@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -44,13 +45,13 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                    Text="インストール先："
-                    FontSize="14"
-                    FontWeight="SemiBold"
+                    Text="インストール先を選択："
+                    FontSize="12"
                     Foreground="#333333"
                     Margin="0,0,0,8"/>
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1"
+                  Background="#F0F0F0">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="37*"/>
@@ -60,19 +61,13 @@
 
 
                 <!-- パス -->
-                <!--<TextBox Grid.Column="0"
-                        x:Name="InstallPathTextBox"
-                        Height="32"
-                        VerticalContentAlignment="Center"
-                        FontSize="13"
-                        Text="{Binding InstallPath}">
-                </TextBox>-->
-
                 <TextBlock Grid.Column="0"
                         x:Name="InstallPathTextBox"                      
                         VerticalAlignment="Center"
                         FontSize="13"
-                        Text="{Binding InstallPath}" Grid.ColumnSpan="2">
+                        Text="{Binding InstallPath}"
+                        Grid.ColumnSpan="2"
+                        Margin="10,0,0,0">
                 </TextBlock>
 
 
@@ -92,19 +87,36 @@
 
         </Grid>
 
-        <!-- 補足情報 -->
+        
         <StackPanel Grid.Row="3"
-                Margin="0,40,0,0">
+                Margin="0,20,0,0">
+            
+            <TextBlock Text="以下のフォルダ構成でインストールされます："
+                    FontSize="11"
+                    Foreground="#333333"/>
+            
+            <TextBlock x:Name="FolderStructureText"
+                    FontWeight="SemiBold"
+                    Text="{Binding FullInstallPath}"
+                    FontSize="13"
+                    Margin="10,10,0,0"/>
+            
+        </StackPanel>
+
+        
+        <!-- 補足情報 -->
+        <StackPanel Grid.Row="4"
+                Margin="0,30,0,0">
 
             <TextBlock Text="必要なディスク容量："
-                    FontSize="13"
+                    FontSize="12"
                     Foreground="#555555"/>
 
             <TextBlock x:Name="DiskSpaceText"
                     Text="約 250 MB"
                     FontSize="13"
                     Foreground="#333333"
-                    Margin="20,5,0,0"/>
+                    Margin="10,5,0,0"/>
 
             <CheckBox x:Name="ShortcutsCheckBox"
                       Content="デスクトップへショートカットを作成する"

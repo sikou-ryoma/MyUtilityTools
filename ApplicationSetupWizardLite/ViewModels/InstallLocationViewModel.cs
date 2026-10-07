@@ -6,6 +6,7 @@ namespace ApplicationSetupWizardLite.ViewModels
     {
         private readonly SetupContext _setupContext;
         public string InstallPath { get; set; } = "";
+        public string FullInstallPath { get; set; } = "";
         public bool CreateShortcut { get; set; } = true;
         public string StatusText { get; set; } = "";
 

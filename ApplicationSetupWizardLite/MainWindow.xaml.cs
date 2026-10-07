@@ -20,7 +20,7 @@ namespace ApplicationSetupWizardLite
             new PathManager(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..")));
         private XmlHelper xml;
         private ProcessContext procCtx = new ProcessContext();
-        private SetupContext setupCtx = new SetupContext();
+        private SetupContext setupCtx;
         private ProcessService procService;
         private AppConfig appConf;
         private StepViewState stepViewState = new StepViewState();
@@ -40,18 +40,13 @@ namespace ApplicationSetupWizardLite
             xml = new XmlHelper(paths.xmlFilePath);
             procService = new ProcessService(xml, procCtx);
             appConf = new AppConfig(xml);
+            setupCtx = new SetupContext(appConf);
             GetStepMessages();
             ChangeContent(procCtx.currentStep);
             AppNameLbl1.Text = appConf.appName;
             VersionLbl.Text = "Version " + appConf.appVersion;
-            
-            setupCtx.InstallPath = Path.Combine(
-                paths.defaultInstallPath,
-                appConf.companyName,
-                appConf.appName,
-                appConf.appVersion
-            );
 
+            setupCtx.InstallPath = paths.defaultInstallPath;
             installLocationViewModel = new InstallLocationViewModel(setupCtx);
 
         }

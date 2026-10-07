@@ -38,6 +38,7 @@ namespace ApplicationSetupWizardLite.Views
 
             _viewModel.InstallPath = _setupCtx.InstallPath;
             _viewModel.CreateShortcut = _setupCtx.CreateShortcut;
+            _viewModel.FullInstallPath = _setupCtx.GetFullInstallPath(_viewModel.InstallPath);
         }
 
         public void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -48,6 +49,8 @@ namespace ApplicationSetupWizardLite.Views
             {
                 _viewModel.InstallPath = dialog.SelectedPath;
                 InstallPathTextBox.Text = _viewModel.InstallPath;
+                _viewModel.FullInstallPath = _setupCtx.GetFullInstallPath(_viewModel.InstallPath);
+                FolderStructureText.Text = _viewModel.FullInstallPath;
 
             }
         }

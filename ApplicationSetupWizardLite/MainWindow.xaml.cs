@@ -4,16 +4,9 @@ using ApplicationSetupWizardLite.Navigation;
 using ApplicationSetupWizardLite.Paths;
 using ApplicationSetupWizardLite.Service;
 using ApplicationSetupWizardLite.Views;
+using ApplicationSetupWizardLite.ViewModels;
 using System.IO;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 
 namespace ApplicationSetupWizardLite
@@ -26,10 +19,12 @@ namespace ApplicationSetupWizardLite
         private PathManager paths =     
             new PathManager(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..")));
         private XmlHelper xml;
-        private ProcessContext procCtx;
+        private ProcessContext procCtx = new ProcessContext();
+        private SetupContext setupCtx = new SetupContext();
         private ProcessService procService;
         private AppConfig appConf;
         private StepViewState stepViewState = new StepViewState();
+        private InstallLocationViewModel installLocationViewModel;
         private readonly string[] stepTexts =
         {
             "ようこそ",
@@ -43,7 +38,6 @@ namespace ApplicationSetupWizardLite
         {
             InitializeComponent();
             xml = new XmlHelper(paths.xmlFilePath);
-            procCtx = new ProcessContext();
             procService = new ProcessService(xml, procCtx);
             appConf = new AppConfig(xml);
             GetStepMessages();
@@ -51,12 +45,14 @@ namespace ApplicationSetupWizardLite
             AppNameLbl1.Text = appConf.appName;
             VersionLbl.Text = "Version " + appConf.appVersion;
             
-            procCtx.installPath = Path.Combine(
+            setupCtx.InstallPath = Path.Combine(
                 paths.defaultInstallPath,
                 appConf.companyName,
                 appConf.appName,
                 appConf.appVersion
             );
+
+            installLocationViewModel = new InstallLocationViewModel(setupCtx);
 
         }
 
@@ -96,7 +92,7 @@ namespace ApplicationSetupWizardLite
                 case 1:
                     return new StepViewState
                     {
-                        View = new InstallLocationView(appConf, xml, paths, procCtx),
+                        View = new InstallLocationView(appConf, xml, paths, procCtx, setupCtx, installLocationViewModel),
                         NextButtonText = "次へ ＞",
                         BackButtonText = "＜ 戻る",
                         CanGoBack = true,
@@ -107,13 +103,14 @@ namespace ApplicationSetupWizardLite
                 case 2:
                     return new StepViewState
                     {
-                        View = new ConfirmView(appConf, xml, paths, procCtx),
+                        View = new ConfirmView(appConf, xml, paths, procCtx, setupCtx),
                         NextButtonText = "インストール",
                         BackButtonText = "＜ 戻る",
                         CanGoBack = true,
                         ShowCancel = true,
                         ShowBack = true
                     };
+
                 case 3:
                     return new StepViewState
                     {
@@ -124,12 +121,12 @@ namespace ApplicationSetupWizardLite
                         ShowCancel = true,
                         ShowBack = false
                     };
+
                 case 4:
                     return new StepViewState
                     {
                         View = new CompleteView(appConf),
                         NextButtonText = "完了",
-                        BackButtonText = "＜ 戻る",
                         CanGoBack = false,
                         ShowCancel = false,
                         ShowBack = false
@@ -140,6 +137,11 @@ namespace ApplicationSetupWizardLite
 
         private void ChangeContent(int step)
         {
+            if (step == 1 || step == 2)
+            {
+                installLocationViewModel.UpdateContext();
+            }
+
             var state = GetStepState(step);
 
             ContentArea.Content = state.View;
@@ -192,6 +194,7 @@ namespace ApplicationSetupWizardLite
             if (procCtx.IsCompleted)
             {
                 this.Close();
+                return;
             }
 
             procService.NextProcess();

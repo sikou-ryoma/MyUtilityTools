@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApplicationSetupWizardLite.Conf
+﻿namespace ApplicationSetupWizardLite.Conf
 {
     public class AppConfig
     {

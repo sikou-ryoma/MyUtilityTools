@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ApplicationSetupWizardLite.Context;
+﻿using ApplicationSetupWizardLite.Context;
 
 namespace ApplicationSetupWizardLite.Service
 {

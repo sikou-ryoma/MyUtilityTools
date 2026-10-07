@@ -1,20 +1,8 @@
 ﻿using ApplicationSetupWizardLite.Conf;
 using ApplicationSetupWizardLite.Paths;
 using ApplicationSetupWizardLite.Context;
-using System;
-using System.Collections.Generic;
-using System.Security.Permissions;
-using System.Text;
+using ApplicationSetupWizardLite.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Printing;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace ApplicationSetupWizardLite.Views
@@ -28,21 +16,28 @@ namespace ApplicationSetupWizardLite.Views
         private readonly XmlHelper _xmlHelper;
         private PathManager _paths;
         private ProcessContext _procCtx;
+        private SetupContext _setupCtx;
+        private InstallLocationViewModel _viewModel;
 
         public InstallLocationView(
             AppConfig appConfig,
             XmlHelper xmlHelper,
             PathManager paths,
-            ProcessContext processContext
-        ){
+            ProcessContext processContext,
+            SetupContext setupCtx,
+            InstallLocationViewModel viewModel)
+        {
             InitializeComponent();
             _appConfig = appConfig;
             _xmlHelper = xmlHelper;
             _paths = paths;
             _procCtx = processContext;
+            _setupCtx = setupCtx;
+            _viewModel = viewModel;
+            DataContext = _viewModel;
 
-            InstallPathTextBox.Text = _procCtx.installPath;
-            ShortcutsCheckBox.IsChecked = true;
+            _viewModel.InstallPath = _setupCtx.InstallPath;
+            _viewModel.CreateShortcut = _setupCtx.CreateShortcut;
         }
 
         public void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -51,8 +46,9 @@ namespace ApplicationSetupWizardLite.Views
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                InstallPathTextBox.Text = dialog.SelectedPath;
-                _procCtx.installPath = dialog.SelectedPath;
+                _viewModel.InstallPath = dialog.SelectedPath;
+                InstallPathTextBox.Text = _viewModel.InstallPath;
+
             }
         }
     }

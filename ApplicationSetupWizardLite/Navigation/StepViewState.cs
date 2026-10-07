@@ -1,11 +1,4 @@
-﻿using ApplicationSetupWizardLite.Conf;
-using ApplicationSetupWizardLite.Views;
-using ApplicationSetupWizardLite.Context;
-using ApplicationSetupWizardLite.Paths;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UserControl = System.Windows.Controls.UserControl;
+﻿using UserControl = System.Windows.Controls.UserControl;
 
 namespace ApplicationSetupWizardLite.Navigation
 {

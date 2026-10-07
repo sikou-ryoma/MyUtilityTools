@@ -53,22 +53,32 @@
             <Grid Grid.Row="1">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="37*"/>
+                    <ColumnDefinition Width="174*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
 
                 <!-- パス -->
-                <TextBox Grid.Column="0"
+                <!--<TextBox Grid.Column="0"
                         x:Name="InstallPathTextBox"
                         Height="32"
                         VerticalContentAlignment="Center"
                         FontSize="13"
-                        Text="C:\Program Files\My Application"/>
+                        Text="{Binding InstallPath}">
+                </TextBox>-->
+
+                <TextBlock Grid.Column="0"
+                        x:Name="InstallPathTextBox"                      
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        Text="{Binding InstallPath}" Grid.ColumnSpan="2">
+                </TextBlock>
+
 
 
                 <!-- 参照 -->
-                <Button Grid.Column="1"
+                <Button Grid.Column="2"
                     x:Name="BrowseButton"
                     Content="参照..."
                     Width="90"
@@ -77,20 +87,21 @@
                     FontSize="13"
                     Click="BrowseButton_Click"/>
 
+
             </Grid>
 
         </Grid>
 
-
         <!-- 補足情報 -->
         <StackPanel Grid.Row="3"
-                Margin="0,35,0,0">
+                Margin="0,40,0,0">
 
             <TextBlock Text="必要なディスク容量："
                     FontSize="13"
                     Foreground="#555555"/>
 
-            <TextBlock Text="約 250 MB"
+            <TextBlock x:Name="DiskSpaceText"
+                    Text="約 250 MB"
                     FontSize="13"
                     Foreground="#333333"
                     Margin="20,5,0,0"/>
@@ -98,13 +109,14 @@
             <CheckBox x:Name="ShortcutsCheckBox"
                       Content="デスクトップへショートカットを作成する"
                       FontSize="12"
-                      IsChecked="True"
+                      IsChecked="{Binding CreateShortcut}"
                       Margin="0,25,0,0" />
 
             <TextBlock Text="インストール先を変更する場合は「参照...」をクリックしてください。"
                     FontSize="12"
                     Foreground="#777777"
                     Margin="0,20,0,0"/>
+
 
         </StackPanel>
 

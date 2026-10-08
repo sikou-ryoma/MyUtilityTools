@@ -3,18 +3,13 @@
 public class XmlHelper
 {
     private readonly XDocument _doc;
+    private readonly string _filePath;
 
     public XmlHelper(string filePath)
     {
+        _filePath = filePath;
         _doc = XDocument.Load(filePath);
     }
-
-    /*
-    public string GetString(string elementName)
-    {
-        return _doc.Root?.Element(elementName)?.Value ?? "";
-    }
-    */
 
     public string GetString(params string[] elements)
     {
@@ -30,6 +25,7 @@ public class XmlHelper
 
         return current.Value;
     }
+
     public int GetInt(string elementName)
     {
         return int.TryParse(
@@ -37,5 +33,16 @@ public class XmlHelper
             out int result)
             ? result
             : 0;
+    }
+
+    public IEnumerable<XElement> GetElements(string elementName)
+    {
+        return _doc.Root?.Elements(elementName)
+            ?? Enumerable.Empty<XElement>();
+    }
+
+    public void Save()
+    {
+        _doc.Save(_filePath);
     }
 }
